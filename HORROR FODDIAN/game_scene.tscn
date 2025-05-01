@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckkjvjbkwmhfb"]
+
+[ext_resource type="MeshLibrary" uid="uid://brvld3h8qbume" path="res://tileset.tres" id="1_mlf6e"]
+[ext_resource type="PackedScene" uid="uid://bfvpkvvi5qa7i" path="res://player.tscn" id="2_po0ka"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_po0ka"]
+sky_top_color = Color(0.0173254, 0.0456133, 0.108813, 1)
+sky_horizon_color = Color(0.118411, 0.121261, 0.132155, 1)
+ground_bottom_color = Color(0.0826605, 0.065772, 0.0461518, 1)
+ground_horizon_color = Color(0.118411, 0.121261, 0.132155, 1)
+energy_multiplier = 0.35
+
+[sub_resource type="Sky" id="Sky_v1wow"]
+sky_material = SubResource("ProceduralSkyMaterial_po0ka")
+
+[sub_resource type="Environment" id="Environment_mixcd"]
+background_mode = 2
+sky = SubResource("Sky_v1wow")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_po0ka"]
+
+[node name="GameScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mixcd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 3.535, 0, 0, 0, 40, 0, 8, 0)
+mesh = SubResource("PlaneMesh_po0ka")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_mlf6e")
+cell_size = Vector3(2, 0.075, 2)
+data = {
+"cells": PackedInt32Array(0, 65535, 655362, 65535, 65535, 655362, 65535, 0, 655362, 0, 0, 655362, 1, 65535, 655362, 1, 0, 655362, 0, 1, 655362, 65535, 1, 655362, 65534, 1, 655362, 65534, 0, 655362, 65534, 65535, 655362, 65534, 65534, 655362, 65535, 65534, 655362, 0, 65534, 655362, 1, 65534, 655362, 1, 1, 655362, 1, 2, 655360, 0, 2, 655360, 65535, 2, 655360, 65534, 2, 655360, 65533, 1, 1048576, 65533, 0, 1048576, 65533, 65535, 1048576, 65534, 65533, 0, 65535, 65533, 0, 0, 65533, 0, 2, 65534, 1441792, 2, 1, 1441792, 65533, 65534, 1048576, 3, 65535, 0, 3, 0, 655360, 2, 0, 1441795, 2, 65535, 1441795, 2, 2, 1441793, 65533, 65533, 1048577, 65533, 2, 655361, 2, 65533, 1, 1, 65533, 0, 4, 65535, 0, 5, 65535, 0, 6, 65535, 0, 7, 65535, 0, 4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 7, 0, 655360)
+}
+
+[node name="Player" parent="." instance=ExtResource("2_po0ka")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.08239, 0)
+top_level = true
+linear_damp = 1.0
